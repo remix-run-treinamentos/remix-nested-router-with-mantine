@@ -1,6 +1,4 @@
-import type { LoaderFunction } from "@remix-run/node";
-import { json } from "@remix-run/node";
-import { Form, Link, Outlet, useLoaderData } from "@remix-run/react";
+import { Link, Outlet, useLoaderData } from "@remix-run/react";
 import { Sun, MoonStars, Logout, Plus, Note } from "tabler-icons-react";
 
 import {
@@ -25,7 +23,11 @@ import type { To } from "history";
 import { useState } from "react";
 import { useMediaQuery } from "@mantine/hooks";
 
-export default function homePage() {
+interface LayoutProps {
+  children: React.ReactNode;
+}
+
+export default function AppLayout({ children }: LayoutProps) {
   const theme = useMantineTheme();
   const { colorScheme, toggleColorScheme } = useMantineColorScheme();
   const [opened, setOpened] = useState(false);
@@ -37,47 +39,6 @@ export default function homePage() {
       navbarOffsetBreakpoint="sm"
       asideOffsetBreakpoint="sm"
       fixed
-      navbar={
-        <Navbar
-          p="md"
-          hiddenBreakpoint="sm"
-          hidden={!opened}
-          onClick={() => setOpened(false)}
-          width={{ sm: 300, lg: 300 }}
-        >
-          <Navbar.Section grow mt="xs">
-            <Stack>
-              <MenuEntry
-                to="cliente"
-                icon={
-                  <ThemeIcon variant="light">
-                    <Plus size={16} />
-                  </ThemeIcon>
-                }
-                label="Cliente"
-              />
-              <MenuEntry
-                to="venda"
-                icon={
-                  <ThemeIcon variant="light">
-                    <Plus size={16} />
-                  </ThemeIcon>
-                }
-                label="Venda"
-              />
-              <MenuEntry
-                to="produto"
-                icon={
-                  <ThemeIcon variant="light">
-                    <Plus size={16} />
-                  </ThemeIcon>
-                }
-                label="Produto"
-              />
-            </Stack>
-          </Navbar.Section>
-        </Navbar>
-      }
       footer={
         <Footer height={60} p="md">
           <Text size={"sm"}>ProgSTOCK 0.01 - BETA</Text>
@@ -95,7 +56,7 @@ export default function homePage() {
                 mr="xl"
               />
             </MediaQuery>
-            <Anchor component={Link} to="." variant="gradient">
+            <Anchor component={Link} to=".." variant="gradient">
               <Title order={1}>Dashboard</Title>
             </Anchor>
 
@@ -125,7 +86,7 @@ export default function homePage() {
         },
       })}
     >
-      <Outlet />
+      {children}
     </AppShell>
   );
 }
