@@ -48,13 +48,22 @@ export default function homePage() {
           <Navbar.Section grow mt="xs">
             <Stack>
               <MenuEntry
-                to="vendas"
+                to="venda"
                 icon={
                   <ThemeIcon variant="light">
                     <Plus size={16} />
                   </ThemeIcon>
                 }
-                label="Vendas"
+                label="Venda"
+              />
+              <MenuEntry
+                to="produto"
+                icon={
+                  <ThemeIcon variant="light">
+                    <Plus size={16} />
+                  </ThemeIcon>
+                }
+                label="Produto"
               />
             </Stack>
           </Navbar.Section>
